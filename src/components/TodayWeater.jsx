@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import placeholder from "../data/placeholder.json";
 import MyCards from "./Cards";
-import goodWheater from "../img/good-wheater.jpg";
+import clear from "../img/good-wheater.jpg";
 import cloudy from "../img/cloudy.jpg";
 import rainy from "../img/rainy.jpg";
 
@@ -64,7 +64,7 @@ const TodayWeater = () => {
         style={{
           height: "700px",
           backgroundImage: `url(${
-            wheaterData && imgSwitch(wheaterData, goodWheater)
+            wheaterData && imgSwitch(wheaterData, clear)
           })`,
           backgroundPosition: "right",
         }}
