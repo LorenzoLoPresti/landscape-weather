@@ -7,8 +7,8 @@ import rainy from "../img/rainy.jpg";
 
 const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   const [cardsData, setCardsData] = useState();
-  const [hover = "0.5", setHover] = useState();
-  const [transform = "1", setTransform] = useState();
+  const [hover, setHover] = useState("0.5");
+  const [transform, setTransform] = useState("1");
 
   const capitalsFetch = async (lat, lon) => {
     const response = await fetch(
@@ -36,7 +36,7 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
         {cardsData && cardsData.name}
       </h3>
       <div
-        className="p-3 bgRepeat opMax"
+        className="p-3 bgRepeat"
         style={{
           backgroundImage: `url(${cardsData && imgSwitch(cardsData, ocean)})`,
           border: "2px solid rgba(255, 255, 255, 0.2)",

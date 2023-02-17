@@ -66,6 +66,7 @@ const TodayWeater = () => {
           backgroundImage: `url(${
             wheaterData && imgSwitch(wheaterData, goodWheater)
           })`,
+          backgroundPosition: "right",
         }}
       >
         <Container>
@@ -89,7 +90,7 @@ const TodayWeater = () => {
               </h4>
             </Col>
             <Col
-              className="mt-2 py-3 px-3 offset-8 Col-4 text-light dataContainer "
+              className="mt-2 py-3 px-3 offset-8 col-4 text-light dataContainer "
               style={{
                 backgroundColor: "rgb (130, 129, 129)",
                 border: "3px solid rgba(255, 255, 255, 0.3)",
@@ -99,18 +100,31 @@ const TodayWeater = () => {
             >
               <h4>
                 Humidity:
-                <strong> {wheaterData && wheaterData.main.humidity}%</strong>
+                <p className="d-inline fw-bold text-center">
+                  {" "}
+                  {wheaterData && wheaterData.main.humidity}%
+                </p>
               </h4>
               <h4>
-                Wind deg: <strong>{wheaterData && wheaterData.wind.deg}</strong>
+                Wind deg:{" "}
+                <p className="d-inline fw-bold text-center">
+                  {" "}
+                  {wheaterData && wheaterData.wind.deg}
+                </p>
               </h4>
               <h4>
                 Wind speed:
-                <strong> {wheaterData && wheaterData.wind.speed}</strong>
+                <p className="d-inline fw-bold text-center">
+                  {" "}
+                  {wheaterData && wheaterData.wind.speed}
+                </p>
               </h4>
               <h4>
                 Visibility:
-                <strong>{wheaterData && wheaterData.wind.speed}</strong>
+                <p className="d-inline fw-bold text-center">
+                  {" "}
+                  {wheaterData && wheaterData.wind.speed}
+                </p>
               </h4>
             </Col>
           </Row>
