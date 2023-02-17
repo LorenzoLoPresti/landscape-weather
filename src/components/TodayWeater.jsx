@@ -34,6 +34,21 @@ const TodayWeater = () => {
     }
   };
 
+  const iconSwitch = (api) => {
+    switch (api.weather[0].main) {
+      case "Clear":
+        return "☀️";
+
+      case "Clouds":
+        return "☁️";
+
+      case "Rain":
+        return "🌧️";
+      default:
+        return cloudy;
+    }
+  };
+
   const fetchWeatherData = async () => {
     const response = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=45.46&lon=09.18&appid=d6f6c690ac2b962a093aae50cf5991e5"
@@ -98,34 +113,41 @@ const TodayWeater = () => {
                 boxShadow: " 0px 0px 20px 4px rgba(255, 255, 255, 0.3)",
               }}
             >
-              <h4>
-                Humidity:
-                <p className="d-inline fw-bold text-center">
-                  {" "}
-                  {wheaterData && wheaterData.main.humidity}%
-                </p>
-              </h4>
-              <h4>
-                Wind deg:{" "}
-                <p className="d-inline fw-bold text-center">
-                  {" "}
-                  {wheaterData && wheaterData.wind.deg}
-                </p>
-              </h4>
-              <h4>
-                Wind speed:
-                <p className="d-inline fw-bold text-center">
-                  {" "}
-                  {wheaterData && wheaterData.wind.speed}
-                </p>
-              </h4>
-              <h4>
-                Visibility:
-                <p className="d-inline fw-bold text-center">
-                  {" "}
-                  {wheaterData && wheaterData.wind.speed}
-                </p>
-              </h4>
+              <Row>
+                <Col xs={7} className="pe-0">
+                  <h4>
+                    Humidity:
+                    <p className="d-inline fw-bold text-center">
+                      {" "}
+                      {wheaterData && wheaterData.main.humidity}%
+                    </p>
+                  </h4>
+                  <h4>
+                    Wind deg:{" "}
+                    <p className="d-inline fw-bold text-center">
+                      {" "}
+                      {wheaterData && wheaterData.wind.deg}
+                    </p>
+                  </h4>
+                  <h4>
+                    Wind speed:
+                    <p className="d-inline fw-bold text-center">
+                      {" "}
+                      {wheaterData && wheaterData.wind.speed}
+                    </p>
+                  </h4>
+                  <h4>
+                    Visibility:
+                    <p className="d-inline fw-bold text-center">
+                      {" "}
+                      {wheaterData && wheaterData.wind.speed}
+                    </p>
+                  </h4>
+                </Col>
+                <Col className="col-4 align-self-center">
+                  <p style={{ fontSize: "5rem" }}>{iconSwitch(wheaterData)}</p>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Container>
