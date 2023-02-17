@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.mainBg {
+  background-size: cover;
+}
+
+.bgRepeat {
+  background-repeat: no-repeat;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.dataContainer {
+  background-color: rgba(130, 130, 130, 0.3);
+}
