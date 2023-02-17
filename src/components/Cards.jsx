@@ -7,6 +7,9 @@ import rainy from "../img/rainy.jpg";
 
 const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   const [cardsData, setCardsData] = useState();
+  const [hover = "0.5", setHover] = useState();
+  const [transform = "1", setTransform] = useState();
+
   const capitalsFetch = async (lat, lon) => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=d6f6c690ac2b962a093aae50cf5991e5`
@@ -33,13 +36,23 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
         {cardsData && cardsData.name}
       </h3>
       <div
-        className="p-3 bgRepeat"
+        className="p-3 bgRepeat opMax"
         style={{
           backgroundImage: `url(${cardsData && imgSwitch(cardsData, ocean)})`,
           border: "2px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "20px",
           backgroundSize: "cover",
           boxShadow: "0px 0px 13px 10px rgba(0, 0, 0, 0.7)",
+          opacity: hover,
+          transform: `scale(${transform})`,
+        }}
+        onPointerEnter={() => {
+          setHover("1");
+          setTransform("1.1");
+        }}
+        onPointerLeave={() => {
+          setHover("0.5");
+          setTransform("1");
         }}
       >
         <div
@@ -58,11 +71,11 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
           </h4>
           <h4>
             <strong>Wind</strong> speed:
-            <p>{cardsData && cardsData.wind.speed}</p>
+            <p> {cardsData && cardsData.wind.speed}</p>
           </h4>
           <h4 className="mt-3">
-            Visibility:
-            <p> {cardsData && cardsData.visibility}</p>
+            Humidity:
+            <p> {cardsData && cardsData.main.humidity}%</p>
           </h4>
         </div>
       </div>

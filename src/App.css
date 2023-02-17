@@ -52,3 +52,7 @@
 .dataContainer {
   background-color: rgba(130, 130, 130, 0.3);
 }
+
+:hover.opMax {
+  opacity: 1;
+}

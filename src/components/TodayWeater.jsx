@@ -53,6 +53,7 @@ const TodayWeater = () => {
   useEffect(() => {
     if (wheaterData !== wheaterData) {
       fetchWeatherData();
+      console.log(wheaterData.humidity);
     }
   }, [wheaterData]);
 
@@ -61,7 +62,7 @@ const TodayWeater = () => {
       <div
         className="width-100 height-100  mt-5 mainBg"
         style={{
-          height: "600px",
+          height: "700px",
           backgroundImage: `url(${
             wheaterData && imgSwitch(wheaterData, goodWheater)
           })`,
@@ -93,21 +94,23 @@ const TodayWeater = () => {
                 backgroundColor: "rgb (130, 129, 129)",
                 border: "3px solid rgba(255, 255, 255, 0.3)",
                 borderRadius: "10px",
+                boxShadow: " 0px 0px 20px 4px rgba(255, 255, 255, 0.3)",
               }}
             >
               <h4>
-                <strong>Wind</strong> deg: {wheaterData && wheaterData.wind.deg}
+                Humidity:
+                <strong> {wheaterData && wheaterData.main.humidity}%</strong>
               </h4>
               <h4>
-                <strong>Wind</strong> gust:{" "}
-                {wheaterData && wheaterData.wind.gust}
+                Wind deg: <strong>{wheaterData && wheaterData.wind.deg}</strong>
               </h4>
               <h4>
-                <strong>Wind</strong> speed:{" "}
-                {wheaterData && wheaterData.wind.speed}
+                Wind speed:
+                <strong> {wheaterData && wheaterData.wind.speed}</strong>
               </h4>
-              <h4 className="mt-3">
-                Visibility: {wheaterData && wheaterData.wind.speed}
+              <h4>
+                Visibility:
+                <strong>{wheaterData && wheaterData.wind.speed}</strong>
               </h4>
             </Col>
           </Row>
