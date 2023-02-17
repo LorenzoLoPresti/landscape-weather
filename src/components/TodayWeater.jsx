@@ -19,10 +19,10 @@ const TodayWeater = () => {
     ],
   };
 
-  const imgSwitch = () => {
-    switch (wheaterData.weather[0].main) {
+  const imgSwitch = (api, clear) => {
+    switch (api.weather[0].main) {
       case "Clear":
-        return goodWheater;
+        return clear;
 
       case "Clouds":
         return cloudy;
@@ -62,7 +62,9 @@ const TodayWeater = () => {
         className="width-100 height-100  mt-5 mainBg"
         style={{
           height: "600px",
-          backgroundImage: `url(${wheaterData && imgSwitch()})`,
+          backgroundImage: `url(${
+            wheaterData && imgSwitch(wheaterData, goodWheater)
+          })`,
         }}
       >
         <Container>
@@ -122,6 +124,7 @@ const TodayWeater = () => {
                 long={coordinate[0]}
                 lat={coordinate[1]}
                 toCelsius={celsiusConverter}
+                imgSwitch={imgSwitch}
               />
             ))}
           </Row>

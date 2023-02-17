@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ocean from "../img/ocean.jpg";
+import goodWheater from "../img/good-wheater.jpg";
+import cloudy from "../img/cloudy.jpg";
+import rainy from "../img/rainy.jpg";
 
-const MyCards = ({ long, lat, toCelsius }) => {
+const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   const [cardsData, setCardsData] = useState();
   const capitalsFetch = async (lat, lon) => {
     const response = await fetch(
@@ -26,13 +29,17 @@ const MyCards = ({ long, lat, toCelsius }) => {
 
   return (
     <Col xs={3} className="my-5 px-3">
-      <h3 className="text-center text-light">{cardsData && cardsData.name}</h3>
+      <h3 className="text-center text-light mb-4">
+        {cardsData && cardsData.name}
+      </h3>
       <div
         className="p-3 bgRepeat"
         style={{
-          backgroundImage: `url(${ocean})`,
+          backgroundImage: `url(${cardsData && imgSwitch(cardsData, ocean)})`,
           border: "2px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "20px",
+          backgroundSize: "cover",
+          boxShadow: "0px 0px 13px 10px rgba(0, 0, 0, 0.7)",
         }}
       >
         <div
