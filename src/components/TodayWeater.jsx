@@ -145,7 +145,9 @@ const TodayWeater = () => {
                   </h4>
                 </Col>
                 <Col className="col-4 align-self-center">
-                  <p style={{ fontSize: "5rem" }}>{iconSwitch(wheaterData)}</p>
+                  <p style={{ fontSize: "5rem" }}>
+                    {wheaterData && iconSwitch(wheaterData)}
+                  </p>
                 </Col>
               </Row>
             </Col>
