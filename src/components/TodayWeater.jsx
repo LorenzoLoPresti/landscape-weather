@@ -6,20 +6,41 @@ import cloudy from "../img/cloudy.jpg";
 import rainy from "../img/rainy.jpg";
 import snowy from "../img/snowy.jpg";
 import city from "../img/city.jpg";
+import paris from "../img/paris.jpg";
+import london from "../img/london.jpg";
+import madrid from "../img/madrid.jpg";
+import newYork from "../img/newyork.jpg";
+import rome from "../img/rome.jpg";
+import melbourne from "../img/melbourne.jpg";
+// import mainReducer from "./redux/reducer";
+// import { useDispatch, useSelector } from "react-redux";
+// import { activeCitySelector, setActiveCityAction } from "./redux/reducer";
 
 const TodayWeater = () => {
   // const placeholderData = placeholder;
   const [wheaterData, setWheaterData] = useState(null);
   const celsiusConverter = 273;
+  const [cardIndex, setCardIndex] = useState(null);
   const citiesObj = {
     citiesLongtLat: [
-      [48.85, 2.36],
-      [51.507351, -0.127758],
-      [40.41, -3.7],
-      [40.71, -74.0],
-      [41.9, 12.49],
-      [28.08, -80.6],
+      [48.85, 2.36, paris],
+      [51.507351, -0.127758, london],
+      [40.41, -3.7, madrid],
+      [40.71, -74.0, newYork],
+      [41.89, 12.49, rome],
+      [28.08, -80.6, melbourne],
     ],
+  };
+
+  // const activeCity = useSelector(activeCitySelector);
+  // const dispatch = useDispatch();
+
+  const dinamycBg = (index) => {
+    return citiesObj.citiesLongtLat?.[index]?.[2];
+  };
+
+  const setIndex = (index) => {
+    setCardIndex(index);
   };
 
   const imgSwitch = (api, clear) => {
@@ -76,11 +97,11 @@ const TodayWeater = () => {
   }, []);
 
   // useEffect(() => {
-  //   if (wheaterData !== wheaterData) {
-  //     fetchWeatherData();
+  //   if (false) {
+  //     // fetchWeatherData();
   //     console.log(wheaterData.humidity);
   //   }
-  // }, [wheaterData]);
+  // }, [cardIndex]);
 
   return (
     <>
@@ -168,22 +189,31 @@ const TodayWeater = () => {
       <div
         style={{
           backgroundColor: "#082747",
-          backgroundImage: `url(${city})`,
+          backgroundImage: `url(${dinamycBg(cardIndex) || city})`,
           backgroundPosition: "right",
         }}
         className="p-5 mainBg"
       >
-        <h3 className="text-center text-light" style={{ fontSize: "2.5rem" }}>
-          Altro dal mondo
-        </h3>
-        <Container style={{ backgroundColor: "rgba(8, 39, 71, 0.7)" }}>
+        <Container
+          style={{ backgroundColor: "rgba(8, 39, 71, 0.7)" }}
+          className="pt-5"
+        >
+          <h3
+            className="text-center text-light mb-5 mt-3"
+            style={{ fontSize: "2.5rem" }}
+          >
+            Altro dal mondo
+          </h3>
           <Row className="gx-3">
-            {citiesObj.citiesLongtLat.map((coordinate) => (
+            {citiesObj.citiesLongtLat.map((coordinate, index) => (
               <MyCards
                 long={coordinate[0]}
                 lat={coordinate[1]}
                 toCelsius={celsiusConverter}
                 imgSwitch={imgSwitch}
+                iconSwitch={iconSwitch}
+                setIndex={setIndex}
+                index={index}
               />
             ))}
           </Row>

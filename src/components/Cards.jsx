@@ -5,9 +5,17 @@ import ocean from "../img/ocean.jpg";
 // import cloudy from "../img/cloudy.jpg";
 // import rainy from "../img/rainy.jpg";
 
-const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
+const MyCards = ({
+  long,
+  lat,
+  toCelsius,
+  imgSwitch,
+  iconSwitch,
+  setIndex,
+  index,
+}) => {
   const [cardsData, setCardsData] = useState();
-  // const [hover, setHover] = useState("0.5");
+  const [hover, setHover] = useState("visible");
   const [transform] = useState("1");
   const [visibility, setVisibility] = useState("hidden");
 
@@ -38,16 +46,18 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
       className="my-5 px-3"
       onPointerEnter={() => {
         setVisibility("visible");
+        setHover("hidden");
       }}
       onPointerLeave={() => {
         setVisibility("hidden");
+        setHover("visible");
       }}
     >
       <h3 className="text-center text-light mb-4">
         {cardsData && cardsData.name}
       </h3>
       <div
-        className="p-3 bgRepeat"
+        className="py-2 px-3 bgRepeat"
         style={{
           backgroundImage: `url(${cardsData && imgSwitch(cardsData, ocean)})`,
           border: "2px solid rgba(255, 255, 255, 0.2)",
@@ -60,6 +70,7 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
         }}
         onPointerEnter={() => {
           setVisibility("visible");
+          setIndex(index);
         }}
         onPointerLeave={() => {
           setVisibility("hidden");
@@ -73,13 +84,16 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
             borderRight: "3px solid rgba(255, 255, 255, 0.3)",
           }}
         >
-          <h5 style={{ visibility: "visible" }} className="mb-2">
+          <h5 style={{ visibility: hover }}>
+            <p>{cardsData && iconSwitch(cardsData)}</p>
+          </h5>
+          <h5 style={{ visibility: "visible" }} className="mb-3">
             <strong>{cardsData && cardsData.weather[0].main}</strong>
           </h5>
-          <h5 style={{ visibility: "visible" }} className="mb-2">
+          <h5 style={{ visibility: "visible" }} className="mb-3">
             {cardsData && Math.trunc(cardsData.main.temp - toCelsius) + "°"}
           </h5>
-          <h5 style={{ visibility: "visible" }} className="mb-2">
+          <h5 style={{ visibility: "visible" }} className="mb-3">
             <strong>Wind</strong> speed:
             <p> {cardsData && cardsData.wind.speed}</p>
           </h5>

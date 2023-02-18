@@ -52,3 +52,7 @@
 .dataContainer {
   background-color: rgba(130, 130, 130, 0.3);
 }
+
+.hoverHidden:hover {
+  display: none;
+}
