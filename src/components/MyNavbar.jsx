@@ -4,7 +4,7 @@ const MyNavbar = () => {
   return (
     <Navbar
       style={{ backgroundColor: "#082747" }}
-      className="position-fixed w-100 top-0"
+      className="position-fixed w-100 top-0 py-4"
     >
       <Container>
         <Navbar.Brand href="#home" className="text-white">

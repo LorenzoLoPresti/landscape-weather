@@ -5,6 +5,8 @@ import MyCards from "./Cards";
 import clear from "../img/good-wheater.jpg";
 import cloudy from "../img/cloudy.jpg";
 import rainy from "../img/rainy.jpg";
+import snowy from "../img/snowy.jpg";
+import city from "../img/city.jpg";
 
 const TodayWeater = () => {
   const placeholderData = placeholder;
@@ -13,9 +15,11 @@ const TodayWeater = () => {
   const citiesObj = {
     citiesLongtLat: [
       [48.85, 2.36],
-      [43.73, 7.42],
+      [51.507351, -0.127758],
       [40.41, -3.7],
       [40.71, -74.0],
+      [41.89, 12.49],
+      [28.08, -80.6],
     ],
   };
 
@@ -29,6 +33,9 @@ const TodayWeater = () => {
 
       case "Rain":
         return rainy;
+
+      case "Snow":
+        return snowy;
       default:
         return cloudy;
     }
@@ -44,8 +51,11 @@ const TodayWeater = () => {
 
       case "Rain":
         return "🌧️";
+
+      case "Snow":
+        return "❄️";
       default:
-        return cloudy;
+        return "🌤️";
     }
   };
 
@@ -75,13 +85,14 @@ const TodayWeater = () => {
   return (
     <>
       <div
-        className="width-100 height-100  mt-5 mainBg"
+        className="width-100 height-100 mainBg"
         style={{
-          height: "700px",
+          height: "90vh",
           backgroundImage: `url(${
             wheaterData && imgSwitch(wheaterData, clear)
           })`,
           backgroundPosition: "right",
+          marginTop: "60px",
         }}
       >
         <Container>
@@ -154,11 +165,18 @@ const TodayWeater = () => {
           </Row>
         </Container>
       </div>
-      <div style={{ backgroundColor: "#082747" }} className="p-5">
+      <div
+        style={{
+          backgroundColor: "#082747",
+          backgroundImage: `url(${city})`,
+          backgroundPosition: "right",
+        }}
+        className="p-5 mainBg"
+      >
         <h3 className="text-center text-light" style={{ fontSize: "2.5rem" }}>
           Altro dal mondo
         </h3>
-        <Container>
+        <Container style={{ backgroundColor: "rgba(8, 39, 71, 0.7)" }}>
           <Row className="gx-3">
             {citiesObj.citiesLongtLat.map((coordinate) => (
               <MyCards

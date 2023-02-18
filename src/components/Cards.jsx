@@ -9,6 +9,7 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   const [cardsData, setCardsData] = useState();
   const [hover, setHover] = useState("0.5");
   const [transform, setTransform] = useState("1");
+  const [visibility, setVisibility] = useState("hidden");
 
   const capitalsFetch = async (lat, lon) => {
     const response = await fetch(
@@ -31,7 +32,16 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   }, [cardsData]);
 
   return (
-    <Col xs={3} className="my-5 px-3">
+    <Col
+      xs={2}
+      className="my-5 px-3"
+      onPointerEnter={() => {
+        setVisibility("visible");
+      }}
+      onPointerLeave={() => {
+        setVisibility("hidden");
+      }}
+    >
       <h3 className="text-center text-light mb-4">
         {cardsData && cardsData.name}
       </h3>
@@ -43,40 +53,39 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
           borderRadius: "20px",
           backgroundSize: "cover",
           boxShadow: "0px 0px 13px 10px rgba(0, 0, 0, 0.7)",
-          opacity: hover,
+
           transform: `scale(${transform})`,
+          visibility: visibility,
         }}
         onPointerEnter={() => {
-          setHover("1");
-          setTransform("1.1");
+          setVisibility("visible");
         }}
         onPointerLeave={() => {
-          setHover("0.5");
-          setTransform("1");
+          setVisibility("hidden");
         }}
       >
         <div
           className="my-5 p-3 px-4 text-light text-center dataContainer "
           style={{
             backgroundColor: "rgb (130, 129, 129)",
-            border: "3px solid rgba(255, 255, 255, 0.3)",
-            borderRadius: "10px",
+            borderLeft: "3px solid rgba(255, 255, 255, 0.3)",
+            borderRight: "3px solid rgba(255, 255, 255, 0.3)",
           }}
         >
-          <h4>
+          <h5 style={{ visibility: "visible" }}>
             <strong>{cardsData && cardsData.weather[0].main}</strong>
-          </h4>
-          <h4>
+          </h5>
+          <h5>
             {cardsData && Math.trunc(cardsData.main.temp - toCelsius) + "°"}
-          </h4>
-          <h4>
+          </h5>
+          <h5 style={{ visibility: "visible" }}>
             <strong>Wind</strong> speed:
             <p> {cardsData && cardsData.wind.speed}</p>
-          </h4>
-          <h4 className="mt-3">
+          </h5>
+          <h5 className="mt-3" style={{ visibility: "visible" }}>
             Humidity:
             <p> {cardsData && cardsData.main.humidity}%</p>
-          </h4>
+          </h5>
         </div>
       </div>
     </Col>
