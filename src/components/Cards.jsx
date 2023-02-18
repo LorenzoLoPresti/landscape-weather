@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import ocean from "../img/ocean.jpg";
-import goodWheater from "../img/good-wheater.jpg";
-import cloudy from "../img/cloudy.jpg";
-import rainy from "../img/rainy.jpg";
+// import goodWheater from "../img/good-wheater.jpg";
+// import cloudy from "../img/cloudy.jpg";
+// import rainy from "../img/rainy.jpg";
 
 const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
   const [cardsData, setCardsData] = useState();
-  const [hover, setHover] = useState("0.5");
-  const [transform, setTransform] = useState("1");
+  // const [hover, setHover] = useState("0.5");
+  const [transform] = useState("1");
   const [visibility, setVisibility] = useState("hidden");
 
   const capitalsFetch = async (lat, lon) => {
@@ -23,13 +23,14 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
 
   useEffect(() => {
     capitalsFetch(long, lat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (cardsData !== cardsData) {
-      capitalsFetch(long, lat);
-    }
-  }, [cardsData]);
+  // useEffect(() => {
+  //   if (cardsData !== cardsData) {
+  //     capitalsFetch(long, lat);
+  //   }
+  // }, [cardsData]);
 
   return (
     <Col
@@ -72,17 +73,17 @@ const MyCards = ({ long, lat, toCelsius, imgSwitch }) => {
             borderRight: "3px solid rgba(255, 255, 255, 0.3)",
           }}
         >
-          <h5 style={{ visibility: "visible" }}>
+          <h5 style={{ visibility: "visible" }} className="mb-2">
             <strong>{cardsData && cardsData.weather[0].main}</strong>
           </h5>
-          <h5>
+          <h5 style={{ visibility: "visible" }} className="mb-2">
             {cardsData && Math.trunc(cardsData.main.temp - toCelsius) + "°"}
           </h5>
-          <h5 style={{ visibility: "visible" }}>
+          <h5 style={{ visibility: "visible" }} className="mb-2">
             <strong>Wind</strong> speed:
             <p> {cardsData && cardsData.wind.speed}</p>
           </h5>
-          <h5 className="mt-3" style={{ visibility: "visible" }}>
+          <h5 style={{ visibility: "visible" }}>
             Humidity:
             <p> {cardsData && cardsData.main.humidity}%</p>
           </h5>

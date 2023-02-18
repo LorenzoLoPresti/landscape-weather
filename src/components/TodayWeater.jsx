@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import placeholder from "../data/placeholder.json";
 import MyCards from "./Cards";
 import clear from "../img/good-wheater.jpg";
 import cloudy from "../img/cloudy.jpg";
@@ -9,7 +8,7 @@ import snowy from "../img/snowy.jpg";
 import city from "../img/city.jpg";
 
 const TodayWeater = () => {
-  const placeholderData = placeholder;
+  // const placeholderData = placeholder;
   const [wheaterData, setWheaterData] = useState(null);
   const celsiusConverter = 273;
   const citiesObj = {
@@ -18,7 +17,7 @@ const TodayWeater = () => {
       [51.507351, -0.127758],
       [40.41, -3.7],
       [40.71, -74.0],
-      [41.89, 12.49],
+      [41.9, 12.49],
       [28.08, -80.6],
     ],
   };
@@ -73,14 +72,15 @@ const TodayWeater = () => {
     fetchWeatherData();
 
     console.log("Stefano", wheaterData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (wheaterData !== wheaterData) {
-      fetchWeatherData();
-      console.log(wheaterData.humidity);
-    }
-  }, [wheaterData]);
+  // useEffect(() => {
+  //   if (wheaterData !== wheaterData) {
+  //     fetchWeatherData();
+  //     console.log(wheaterData.humidity);
+  //   }
+  // }, [wheaterData]);
 
   return (
     <>
