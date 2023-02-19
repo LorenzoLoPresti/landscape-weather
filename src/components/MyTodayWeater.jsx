@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import MyCards from "./Cards";
+import MyCards from "./MyCards";
 import clear from "../img/good-wheater.jpg";
 import cloudy from "../img/cloudy.jpg";
 import rainy from "../img/rainy.jpg";
@@ -18,7 +18,7 @@ import MySearchbar from "./MySearchbar";
 // import { useDispatch, useSelector } from "react-redux";
 // import { activeCitySelector, setActiveCityAction } from "./redux/reducer";
 
-const TodayWeater = () => {
+const TodayWeaterComponent = () => {
   // const placeholderData = placeholder;
   const [wheaterData, setWheaterData] = useState(null);
   const celsiusConverter = 273;
@@ -256,102 +256,4 @@ const TodayWeater = () => {
     </>
   );
 };
-export default TodayWeater;
-
-// import { useEffect, useState } from "react";
-// import { Container, Row, Col } from "react-bootstrap";
-// import placeholder from "../data/placeholder.json";
-// import MyCards from "./Cards";
-
-// const fetchWeatherDataApi = async () => {
-//   const response = await fetch(
-//     "https://api.openweathermap.org/data/2.5/weather?lat=45.46&lon=09.18&appid=d6f6c690ac2b962a093aae50cf5991e5"
-//   );
-//   if (response.ok) {
-//     const data = await response.json();
-//     return data;
-//   }
-// };
-
-// const TodayWeater = () => {
-//   const placeholderData = placeholder;
-//   const [wheaterData, setWheaterData] = useState(null);
-//   console.log(placeholderData);
-//   const arr = [1, 2, 3];
-
-//   const fetchWeatherData = async () =>
-//     setWheaterData(await fetchWeatherDataApi());
-
-//   useEffect(() => {
-//     fetchWeatherData();
-//     console.log("Stefano", wheaterData);
-//   }, []);
-
-//   useEffect(() => {
-//     if (wheaterData !== wheaterData) {
-//       fetchWeatherData();
-//     }
-//   }, [wheaterData]);
-
-//   return (
-//     <>
-//       <div
-//         className="width-100 height-100  mt-5 mainBg"
-//         style={{ height: "600px" }}
-//       >
-//         <Container>
-//           <Row className="p-5">
-//             <Col className="mt-5 offset-8 Col-4 text-center ">
-//               <h1 className="text-light fw-light" style={{ fontSize: "3rem" }}>
-//                 {wheaterData && wheaterData.name}
-//               </h1>
-//               <h2
-//                 className=" text-light"
-//                 style={{ fontSize: "6rem", fontWeight: "100" }}
-//               >
-//                 {wheaterData && wheaterData.main.temp}
-//               </h2>
-//               <h4
-//                 className="text-light"
-//                 style={{ fontSize: "2.5rem", fontWeight: "100" }}
-//               >
-//                 {wheaterData && wheaterData.weather[0].main}
-//               </h4>
-//             </Col>
-//             <Col
-//               className="mt-2 py-3 px-3 offset-8 Col-4 text-light dataContainer "
-//               style={{
-//                 backgroundColor: "rgb (130, 129, 129)",
-//                 border: "3px solid rgba(255, 255, 255, 0.3)",
-//                 borderRadius: "10px",
-//               }}
-//             >
-//               <h4>
-//                 <strong>Wind</strong> deg: {wheaterData && wheaterData.wind.deg}
-//               </h4>
-//               <h4>
-//                 <strong>Wind</strong> gust:{" "}
-//                 {wheaterData && wheaterData.wind.gust}
-//               </h4>
-//               <h4>
-//                 <strong>Wind</strong> speed:{" "}
-//                 {wheaterData && wheaterData.wind.speed}
-//               </h4>
-//               <h4 className="mt-3">
-//                 Visibility: {wheaterData && wheaterData.wind.speed}
-//               </h4>
-//             </Col>
-//           </Row>
-//         </Container>
-//       </div>
-//       <Container>
-//         <Row>
-//           {arr.map((e) => (
-//             <MyCards />
-//           ))}
-//         </Row>
-//       </Container>
-//     </>
-//   );
-// };
-// export default TodayWeater;
+export default TodayWeaterComponent;
