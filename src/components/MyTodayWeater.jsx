@@ -129,7 +129,7 @@ const TodayWeaterComponent = () => {
   }, []);
 
   useEffect(() => {
-    searchFetchDynamicCities(searchData);
+    wheaterData && searchFetchDynamicCities(searchData);
   }, [searchData]);
 
   return (
