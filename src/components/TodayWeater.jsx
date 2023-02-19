@@ -139,7 +139,7 @@ const TodayWeater = () => {
       <div
         className="width-100 height-100 mainBg"
         style={{
-          height: "95vh",
+          height: "100vh",
           backgroundImage: `url(${
             wheaterData && imgSwitch(wheaterData, clear)
           })`,
@@ -173,7 +173,7 @@ const TodayWeater = () => {
               className="mt-2 py-3 px-3 offset-8 col-4 text-light dataContainer "
               style={{
                 backgroundColor: "rgb (130, 129, 129)",
-                border: "3px solid rgba(255, 255, 255, 0.3)",
+                border: "2px solid rgba(255, 255, 255, 0.3)",
                 borderRadius: "10px",
                 boxShadow: " 0px 0px 20px 4px rgba(255, 255, 255, 0.3)",
               }}
@@ -224,6 +224,7 @@ const TodayWeater = () => {
           backgroundColor: "#082747",
           backgroundImage: `url(${dinamycBg(cardIndex) || city})`,
           backgroundPosition: "right",
+          transition: "background-image 0.5s ease-in",
         }}
         className="p-5 mainBg"
       >

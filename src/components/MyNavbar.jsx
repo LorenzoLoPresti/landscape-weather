@@ -3,8 +3,8 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 const MyNavbar = () => {
   return (
     <Navbar
-      style={{ backgroundColor: "#082747" }}
-      className="position-fixed w-100 top-0 py-4"
+      style={{ backgroundColor: "rgba(8, 39, 71, 0.3)" }}
+      className=" top-0 "
     >
       <Container>
         <Navbar.Brand href="#home" className="text-white">

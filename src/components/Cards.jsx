@@ -63,7 +63,7 @@ const MyCards = ({
           border: "2px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "20px",
           backgroundSize: "cover",
-          boxShadow: "0px 0px 13px 10px rgba(0, 0, 0, 0.7)",
+          boxShadow: "0px 0px 13px 10px rgba(8, 39, 71, 0.9)",
 
           transform: `scale(${transform})`,
           visibility: visibility,
