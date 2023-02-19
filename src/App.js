@@ -8,7 +8,6 @@ function App() {
   useEffect(() => {}, []);
   return (
     <>
-      <MyNavbar />
       <TodayWeater />
     </>
   );

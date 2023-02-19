@@ -6,12 +6,14 @@ import cloudy from "../img/cloudy.jpg";
 import rainy from "../img/rainy.jpg";
 import snowy from "../img/snowy.jpg";
 import city from "../img/city.jpg";
+import misty from "../img/misty.jpg";
 import paris from "../img/paris.jpg";
 import london from "../img/london.jpg";
 import madrid from "../img/madrid.jpg";
 import newYork from "../img/newyork.jpg";
 import rome from "../img/rome.jpg";
 import melbourne from "../img/melbourne.jpg";
+import MySearchbar from "./MySearchbar";
 // import mainReducer from "./redux/reducer";
 // import { useDispatch, useSelector } from "react-redux";
 // import { activeCitySelector, setActiveCityAction } from "./redux/reducer";
@@ -31,6 +33,8 @@ const TodayWeater = () => {
       [28.08, -80.6, melbourne],
     ],
   };
+  const [searchData, setSearchData] = useState("");
+  console.log("paperino", searchData);
 
   // const activeCity = useSelector(activeCitySelector);
   // const dispatch = useDispatch();
@@ -41,6 +45,10 @@ const TodayWeater = () => {
 
   const setIndex = (index) => {
     setCardIndex(index);
+  };
+
+  const setSearch = (search) => {
+    setSearchData(search);
   };
 
   const imgSwitch = (api, clear) => {
@@ -56,6 +64,10 @@ const TodayWeater = () => {
 
       case "Snow":
         return snowy;
+
+      case "Mist":
+        return misty;
+
       default:
         return cloudy;
     }
@@ -74,6 +86,10 @@ const TodayWeater = () => {
 
       case "Snow":
         return "❄️";
+
+      case "Mist":
+        return "🌫️";
+
       default:
         return "🌤️";
     }
@@ -89,6 +105,24 @@ const TodayWeater = () => {
     }
   };
 
+  const searchFetchDynamicCities = async (city) => {
+    const response = await fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=d6f6c690ac2b962a093aae50cf5991e5`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      console.log("stefano ribalta la situazione", data[0].lat);
+      const newResponse = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=d6f6c690ac2b962a093aae50cf5991e5`
+      );
+      if (newResponse.ok) {
+        const newData = await newResponse.json();
+        console.log("stefano vince la guerra da solo", newData);
+        setWheaterData(newData);
+      }
+    }
+  };
+
   useEffect(() => {
     fetchWeatherData();
 
@@ -96,28 +130,27 @@ const TodayWeater = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   if (false) {
-  //     // fetchWeatherData();
-  //     console.log(wheaterData.humidity);
-  //   }
-  // }, [cardIndex]);
+  useEffect(() => {
+    searchFetchDynamicCities(searchData);
+  }, [searchData]);
 
   return (
     <>
       <div
         className="width-100 height-100 mainBg"
         style={{
-          height: "90vh",
+          height: "95vh",
           backgroundImage: `url(${
             wheaterData && imgSwitch(wheaterData, clear)
           })`,
           backgroundPosition: "right",
-          marginTop: "60px",
+
+          transition: "background-image 1s ease",
         }}
       >
         <Container>
           <Row className="p-5">
+            <MySearchbar setSearch={setSearch} />
             <Col className="mt-5 offset-8 Col-4 text-center ">
               <h1 className="text-light fw-light" style={{ fontSize: "3rem" }}>
                 {wheaterData && wheaterData.name}
