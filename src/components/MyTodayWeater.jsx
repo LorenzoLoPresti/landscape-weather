@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import MyCards from "./MyCards";
 import clear from "../img/good-wheater.jpg";
 import cloudy from "../img/cloudy.jpg";
@@ -14,12 +14,8 @@ import newYork from "../img/newyork.jpg";
 import rome from "../img/rome.jpg";
 import melbourne from "../img/melbourne.jpg";
 import MySearchbar from "./MySearchbar";
-// import mainReducer from "./redux/reducer";
-// import { useDispatch, useSelector } from "react-redux";
-// import { activeCitySelector, setActiveCityAction } from "./redux/reducer";
 
 const TodayWeaterComponent = () => {
-  // const placeholderData = placeholder;
   const [wheaterData, setWheaterData] = useState(null);
   const celsiusConverter = 273;
   const [cardIndex, setCardIndex] = useState(null);
@@ -34,10 +30,6 @@ const TodayWeaterComponent = () => {
     ],
   };
   const [searchData, setSearchData] = useState("");
-  console.log("paperino", searchData);
-
-  // const activeCity = useSelector(activeCitySelector);
-  // const dispatch = useDispatch();
 
   const dinamycBg = (index) => {
     return citiesObj.citiesLongtLat?.[index]?.[2];
@@ -96,37 +88,43 @@ const TodayWeaterComponent = () => {
   };
 
   const fetchWeatherData = async () => {
-    const response = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?lat=45.46&lon=09.18&appid=d6f6c690ac2b962a093aae50cf5991e5"
-    );
-    if (response.ok) {
-      const data = await response.json();
-      setWheaterData(data);
+    try {
+      const response = await fetch(
+        "https://api.openweathermap.org/data/2.5/weather?lat=45.46&lon=09.18&appid=d6f6c690ac2b962a093aae50cf5991e5"
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setWheaterData(data);
+      }
+    } catch (error) {
+      alert(`The error ${error} has occurred, please try again`);
     }
   };
 
   const searchFetchDynamicCities = async (city) => {
-    const response = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=d6f6c690ac2b962a093aae50cf5991e5`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      console.log("stefano ribalta la situazione", data[0].lat);
-      const newResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=d6f6c690ac2b962a093aae50cf5991e5`
+    try {
+      const response = await fetch(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=d6f6c690ac2b962a093aae50cf5991e5`
       );
-      if (newResponse.ok) {
-        const newData = await newResponse.json();
-        console.log("stefano vince la guerra da solo", newData);
-        setWheaterData(newData);
+      if (response.ok) {
+        const data = await response.json();
+
+        const newResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=d6f6c690ac2b962a093aae50cf5991e5`
+        );
+        if (newResponse.ok) {
+          const newData = await newResponse.json();
+
+          setWheaterData(newData);
+        }
       }
+    } catch (error) {
+      alert(`the error ${error} has occurred`);
     }
   };
 
   useEffect(() => {
     fetchWeatherData();
-
-    console.log("Stefano", wheaterData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -166,7 +164,10 @@ const TodayWeaterComponent = () => {
                 className="text-light"
                 style={{ fontSize: "2.5rem", fontWeight: "100" }}
               >
-                {wheaterData && wheaterData.weather[0].main}
+                {/* {wheaterData && wheaterData.weather[0].main} */}
+                {(wheaterData && wheaterData.weather[0].main) || (
+                  <Spinner animation="border" variant="primary" />
+                )}
               </h4>
             </Col>
             <Col

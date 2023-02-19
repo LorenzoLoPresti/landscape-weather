@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import ocean from "../img/ocean.jpg";
-// import goodWheater from "../img/good-wheater.jpg";
-// import cloudy from "../img/cloudy.jpg";
-// import rainy from "../img/rainy.jpg";
 
 const MyCards = ({
   long,
@@ -33,12 +30,6 @@ const MyCards = ({
     capitalsFetch(long, lat);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   if (cardsData !== cardsData) {
-  //     capitalsFetch(long, lat);
-  //   }
-  // }, [cardsData]);
 
   return (
     <Col
