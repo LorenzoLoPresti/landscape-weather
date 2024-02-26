@@ -2,6 +2,8 @@
 
 Prima web-app realizzata in react.
 
+![Preview](https://raw.githubusercontent.com/LorenzoLoPresti/images/main/landscape-weather/image1.png)
+
 ## Stack Utilizzato
 
 - React
