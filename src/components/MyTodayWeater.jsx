@@ -130,6 +130,7 @@ const TodayWeaterComponent = () => {
 
   useEffect(() => {
     wheaterData && searchFetchDynamicCities(searchData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchData]);
 
   return (
